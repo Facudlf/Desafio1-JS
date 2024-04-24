@@ -1,14 +1,18 @@
-function rellenarArray() {
-    const seedrandom = require('seedrandom');
-    var random = seedrandom(1763519);
-    let numerosAleatorios = Array.from({length: 1000000}, () => random.int32());
-    return numerosAleatorios;
+const seedrandom = require('seedrandom');
+
+// Funcion que genera el arreglo con la semilla 1763519
+function generarArray(array) {
+    const random = seedrandom('1763519');
+    let i = 0;
+    for (; i < 1000000; i++) {
+        array.push(random.int32());
+    }
 }
 
 // Funcion que cuenta los numeros positivos Punto 3
 function cuantos_positivos(array) {
     let positivo = 0;
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i <= array.length; i++) {
         if (array[i] > 0 ) {
             positivo ++;}
     }
@@ -18,7 +22,7 @@ function cuantos_positivos(array) {
 // Funcion que cuenta los numeros negativos Punto 4
 function cuantos_negativos(array) {
     let negativo = 0;
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i <= array.length; i++) {
         if (array[i] < 0) {
             negativo ++;}
     }
@@ -43,14 +47,35 @@ function divisibles_7(array) {
 
 // Funcion que cuenta cuantas decenas hay en el arreglo Punto 6
 function contarDecenas(array) {
-    const digitCounts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i <= array.length; i++) {
-    const secondLastDigit = Math.floor(Math.abs(array[i]) / 10) % 10;
-    digitCounts[secondLastDigit]++;
-}
-    return digitCounts;
-}
+    let decenas = Array(10).fill(0);
+    for (let i = 0; i < array.length; i++) {
 
+        let numero = Math.floor(Math.abs(array[i]) / 10) % 10;
+        
+        if (numero === 0 ) {
+            decenas[0]++;
+        } else if (numero === 1) {
+            decenas[1]++;
+        } else if (numero === 2) {
+            decenas[2]++;
+        } else if (numero === 3) {
+            decenas[3]++;
+        } else if (numero === 4) {
+            decenas[4]++;
+        } else if (numero === 5) {
+            decenas[5]++;
+        } else if (numero === 6) {
+            decenas[6]++;
+        } else if (numero === 7) {
+            decenas[7]++;
+        } else if (numero === 8) {
+            decenas[8]++;
+        } else if (numero === 9) {
+            decenas[9] += 1;
+        }
+    }
+    return decenas;
+}
 
 // Funcion que halla la posicion +1 del menor numero del arreglo Punto 7
 function hallarPosicionMenor(array) {
@@ -93,7 +118,7 @@ function promedio_6_digitos(array) {
     let total = 0;
     let cantidad = 0;
     for (let i = 0; i < array.length; i++ ){
-        if (Math.abs(array[i]).toString().length === 6){
+        if (array[i].toString().length === 6){
             total += array[i];
             cantidad ++;
         }
@@ -111,26 +136,28 @@ function calcularPromedio(total, cantidad, mensaje){
     }
 }
 
+
+
 // Variables
-let array = rellenarArray();
+let array = [];
 let positivo = cuantos_positivos(array);
 let negativo = cuantos_negativos(array);
 let divisibles = divisibles_7(array);
 let posicion = hallarPosicionMenor(array);
 let menor = ordenar(array);
 let decena = contarDecenas(array);
-const positiveNumbers = array.filter(num => num > 0)
-// Llamado de funciones
 
+// Llamado de funciones
+generarArray(array);
 
 // Impresion de resultados
 console.log('Largo del arreglo: ' + array.length);
 console.log('Positivos: ' + positivo);
 console.log('Negativos: ' + negativo);
+console.log('Contiene 0: ' + buscarCero(array));
 console.log('Divisibles por 7: ' + divisibles);
 console.log(`${menor}:${posicion + 1}`);
-console.log('Decena: ' + '{'+decena+'}');
+console.log('Decena: ' + decena);
 console.log('Promedio de 6 digitos: ' + promedio_6_digitos(array));
 console.log('Seguidos: ' + contar(array));
-console.log('Positive numbers:', positiveNumbers.length);
-console.log(buscarCero(array) ? 'Contiene 0' : 'No contiene 0');
+
