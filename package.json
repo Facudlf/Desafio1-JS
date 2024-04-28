@@ -1,5 +1,16 @@
 {
+  "name": "desafio1",
+  "version": "1.0.0",
+  "main": "desafio1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "seedrandom": "^3.0.5"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
